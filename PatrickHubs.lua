@@ -269,80 +269,93 @@ local function CreateHub(name,description,order,callback)
 end
 
 --==================================================
--- MIRANDA HUB
+-- 1. SMALL SERVE
+--==================================================
+
+CreateHub(
+    "Small Serve",
+    "Small Serve",
+    1,
+    function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/dertonware/scriptasda/refs/heads/main/scriptlua",true))()
+    end
+)
+
+--==================================================
+-- 2. AJJANS HUB
+--==================================================
+
+CreateHub(
+    "Ajjans Hub",
+    "Ajjans Hub",
+    2,
+    function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/virtuososvisualedits-prog/Ww/refs/heads/main/final-obfuscated.lua"))()
+    end
+)
+
+--==================================================
+-- 3. MIRANDA HUB
 --==================================================
 
 CreateHub(
     "Miranda Hub",
     "Miranda Hub",
-    1,
+    3,
     function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()
     end
 )
 
 --==================================================
--- LENNON HUB
+-- 4. LENNON HUB
 --==================================================
 
 CreateHub(
     "Lennon Hub",
     "Lennon Hub",
-    2,
+    4,
     function()
         loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/73260ee6e0b3892aa700a13e1fd7d3c9.lua"))()
     end
 )
 
 --==================================================
--- FYY COMMUNITY
+-- 5. FYY COMMUNITY
 --==================================================
 
 CreateHub(
     "FYY COMMUNITY",
     "FYY COMMUNITY",
-    3,
+    5,
     function()
         loadstring(game:HttpGet("https://FyyCommunity.my.id"))()
     end
 )
 
 --==================================================
--- CHILLI HUB
+-- 6. CHILLI HUB
 --==================================================
 
 CreateHub(
     "Chilli Hub",
     "Chilli Hub",
-    4,
+    6,
     function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tienkhanh1/Chilli-Hub-Script/refs/heads/main/StealAnEgg"))()
     end
 )
 
 --==================================================
--- NIGHT HUB
+-- 7. NIGHT HUB
 --==================================================
 
 CreateHub(
     "Night Hub",
     "Night Hub",
-    5,
+    7,
     function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/StealEggOnly.luau"))()
-    end
-)
-
---==================================================
--- SMALL SERVE
---==================================================
-
-CreateHub(
-    "Small Serve",
-    "Small Serve",
-    6,
-    function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/dertonware/scriptasda/refs/heads/main/scriptlua",true))()
     end
 )
 
@@ -368,15 +381,10 @@ Corner(Bubble,100)
 Border(Bubble,2,0.15)
 
 --==================================================
--- ARRASTAR JANELA
+-- ARRASTAR
 --==================================================
 
 Drag(Main,Header)
-
---==================================================
--- ARRASTAR BOLHA
---==================================================
-
 Drag(Bubble,Bubble)
 
 --==================================================
