@@ -321,20 +321,7 @@ CreateHub(
 )
 
 --==================================================
--- 5. LENNON HUB V3
---==================================================
-
-CreateHub(
-    "Lennon Hub V3",
-    "Lennon Hub V3",
-    4,
-    function()
-        loadstring(game:HttpGet("https://raw.githubus ercontent.com/lennonxscripts/lennonhubv3/refs/heads/main/stealanegg.lua"))()
-    end
-)
-
---==================================================
--- 6. FYY COMMUNITY
+-- 5. FYY COMMUNITY
 --==================================================
 
 CreateHub(
@@ -347,7 +334,7 @@ CreateHub(
 )
 
 --==================================================
--- 7. CHILLI HUB
+-- 6. CHILLI HUB
 --==================================================
 
 CreateHub(
@@ -360,7 +347,7 @@ CreateHub(
 )
 
 --==================================================
--- 8. NIGHT HUB
+-- 9. NIGHT HUB
 --==================================================
 
 CreateHub(
