@@ -303,7 +303,7 @@ CreateHub(
     "Miranda Hub",
     3,
     function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/mirandaafk.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/afkk"))()
     end
 )
 
