@@ -282,17 +282,31 @@ CreateHub(
 )
 
 --==================================================
--- 1. SMALL SERVE
+-- 2. Wzeus No Key
 --==================================================
 
 CreateHub(
     "Anti Hit No Key",
     "Anti Hit No Key",
-    1,
+    2,
     function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Wzeus-NTH/Wzeusno1/main/Wzeus/nthzz"))()
     end
 )
+
+--==================================================
+-- 3. FPS JANE
+--==================================================
+
+CreateHub(
+    "Anti Lag No key",
+    "Anti Lag No key",
+    3,
+    function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/pf4880808-collab/-Fps-Jane/main/%2BFpsJane.lua"))()
+    end
+)
+
 --==================================================
 -- 2. AJJANS HUB
 --==================================================
@@ -300,7 +314,7 @@ CreateHub(
 CreateHub(
     "Ajjans Hub Key System",
     "Ajjans Hub Key System",
-    2,
+    4,
     function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/virtuososvisualedits-prog/Ww/refs/heads/main/final-obfuscated.lua"))()
     end
@@ -313,7 +327,7 @@ CreateHub(
 CreateHub(
     "Miranda Hub No Key",
     "Miranda Hub No Key",
-    3,
+    5,
     function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/afkk"))()
     end
@@ -326,7 +340,7 @@ CreateHub(
 CreateHub(
     "Lennon Hub No Key",
     "Lennon Hub No Key",
-    4,
+    6,
     function()
         loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/73260ee6e0b3892aa700a13e1fd7d3c9.lua"))()
     end
@@ -339,7 +353,7 @@ CreateHub(
 CreateHub(
     "FYY COMMUNITY Key System",
     "FYY COMMUNITY Key System",
-    5,
+    7,
     function()
         loadstring(game:HttpGet("https://FyyCommunity.my.id"))()
     end
@@ -352,7 +366,7 @@ CreateHub(
 CreateHub(
     "Chilli Hub No Key",
     "Chilli Hub No Key",
-    6,
+    8,
     function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tienkhanh1/Chilli-Hub-Script/refs/heads/main/StealAnEgg"))()
     end
@@ -365,7 +379,7 @@ CreateHub(
 CreateHub(
     "Night Hub Key System",
     "Night Hub Key System",
-    7,
+    9,
     function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/StealEggOnly.luau"))()
     end
