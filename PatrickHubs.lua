@@ -282,6 +282,18 @@ CreateHub(
 )
 
 --==================================================
+-- 1. SMALL SERVE
+--==================================================
+
+CreateHub(
+    "Anti Hit No Key",
+    "Anti Hit No Key",
+    1,
+    function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Wzeus-NTH/Wzeusno1/main/Wzeus/nthzz"))()
+    end
+)
+--==================================================
 -- 2. AJJANS HUB
 --==================================================
 
