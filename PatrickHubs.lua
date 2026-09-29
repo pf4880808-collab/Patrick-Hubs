@@ -1,298 +1,387 @@
---// Patrick Hubs
---// LocalScript
+--====================================================--
+--                 PATRICK HUBS
+--====================================================--
 
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 
-local player = Players.LocalPlayer
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
 
---// GUI
-local gui = Instance.new("ScreenGui")
-gui.Name = "PatrickHubs"
-gui.ResetOnSpawn = false
-gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-gui.Parent = player:WaitForChild("PlayerGui")
-
---// Cores
-local BLACK = Color3.fromRGB(0, 0, 0)
-local WHITE = Color3.fromRGB(255, 255, 255)
-
---// Função para criar contorno de texto
-local function outlineText(label)
-    label.TextColor3 = BLACK
-    label.TextStrokeColor3 = WHITE
-    label.TextStrokeTransparency = 0
-    label.Font = Enum.Font.GothamBold
+local Old = PlayerGui:FindFirstChild("PatrickHubs")
+if Old then
+    Old:Destroy()
 end
 
---// Janela principal
-local main = Instance.new("Frame")
-main.Size = UDim2.fromOffset(330, 430)
-main.Position = UDim2.new(0.5, -165, 0.5, -215)
-main.BackgroundColor3 = BLACK
-main.BorderSizePixel = 0
-main.Parent = gui
+local BLACK = Color3.fromRGB(0,0,0)
+local WHITE = Color3.fromRGB(255,255,255)
 
-local mainCorner = Instance.new("UICorner")
-mainCorner.CornerRadius = UDim.new(0, 18)
-mainCorner.Parent = main
+local GUI = Instance.new("ScreenGui")
+GUI.Name = "PatrickHubs"
+GUI.ResetOnSpawn = false
+GUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+GUI.Parent = PlayerGui
 
-local mainStroke = Instance.new("UIStroke")
-mainStroke.Color = WHITE
-mainStroke.Thickness = 2
-mainStroke.Parent = main
+local function Corner(obj, radius)
+    local c = Instance.new("UICorner")
+    c.CornerRadius = UDim.new(0, radius)
+    c.Parent = obj
+end
 
---// Barra superior
-local top = Instance.new("Frame")
-top.Size = UDim2.new(1, 0, 0, 55)
-top.BackgroundTransparency = 1
-top.Parent = main
+local function Stroke(obj, thickness)
+    local s = Instance.new("UIStroke")
+    s.Color = WHITE
+    s.Thickness = thickness
+    s.Parent = obj
+    return s
+end
 
---// Título
-local title = Instance.new("TextLabel")
-title.Size = UDim2.new(1, -100, 1, 0)
-title.Position = UDim2.fromOffset(18, 0)
-title.BackgroundTransparency = 1
-title.Text = "Patrick Hubs"
-title.TextSize = 22
-title.TextXAlignment = Enum.TextXAlignment.Left
-outlineText(title)
-title.Parent = top
+local function TextStyle(obj, size)
+    obj.TextColor3 = BLACK
+    obj.TextStrokeColor3 = WHITE
+    obj.TextStrokeTransparency = 0
+    obj.Font = Enum.Font.GothamBold
+    obj.TextSize = size
+end
 
---// Botão minimizar
-local minimize = Instance.new("TextButton")
-minimize.Size = UDim2.fromOffset(38, 38)
-minimize.Position = UDim2.new(1, -85, 0, 8)
-minimize.BackgroundColor3 = BLACK
-minimize.Text = "-"
-minimize.TextSize = 25
-outlineText(minimize)
-minimize.Parent = top
+--====================================================--
+-- JANELA
+--====================================================--
 
-local minCorner = Instance.new("UICorner")
-minCorner.CornerRadius = UDim.new(1, 0)
-minCorner.Parent = minimize
+local Main = Instance.new("Frame")
+Main.Size = UDim2.fromOffset(330,430)
+Main.Position = UDim2.new(.5,-165,.5,-215)
+Main.BackgroundColor3 = BLACK
+Main.BorderSizePixel = 0
+Main.Parent = GUI
 
-local minStroke = Instance.new("UIStroke")
-minStroke.Color = WHITE
-minStroke.Thickness = 1.5
-minStroke.Parent = minimize
+Corner(Main,18)
+Stroke(Main,2)
 
---// Botão fechar
-local close = Instance.new("TextButton")
-close.Size = UDim2.fromOffset(38, 38)
-close.Position = UDim2.new(1, -43, 0, 8)
-close.BackgroundColor3 = BLACK
-close.Text = "X"
-close.TextSize = 17
-outlineText(close)
-close.Parent = top
+--====================================================--
+-- HEADER
+--====================================================--
 
-local closeCorner = Instance.new("UICorner")
-closeCorner.CornerRadius = UDim.new(1, 0)
-closeCorner.Parent = close
+local Header = Instance.new("Frame")
+Header.Size = UDim2.new(1,0,0,58)
+Header.BackgroundTransparency = 1
+Header.Parent = Main
 
-local closeStroke = Instance.new("UIStroke")
-closeStroke.Color = WHITE
-closeStroke.Thickness = 1.5
-closeStroke.Parent = close
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1,-105,1,0)
+Title.Position = UDim2.fromOffset(15,0)
+Title.BackgroundTransparency = 1
+Title.Text = "Patrick Hubs"
+Title.TextXAlignment = Enum.TextXAlignment.Left
+TextStyle(Title,21)
+Title.Parent = Header
 
---// Área de scroll
-local scroll = Instance.new("ScrollingFrame")
-scroll.Size = UDim2.new(1, -20, 1, -70)
-scroll.Position = UDim2.fromOffset(10, 60)
-scroll.BackgroundTransparency = 1
-scroll.BorderSizePixel = 0
-scroll.ScrollBarThickness = 4
-scroll.ScrollBarImageColor3 = WHITE
-scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
-scroll.Parent = main
+local Minimize = Instance.new("TextButton")
+Minimize.Size = UDim2.fromOffset(38,38)
+Minimize.Position = UDim2.new(1,-86,0,10)
+Minimize.BackgroundColor3 = BLACK
+Minimize.Text = "-"
+Minimize.AutoButtonColor = false
+TextStyle(Minimize,24)
+Minimize.Parent = Header
 
-local layout = Instance.new("UIListLayout")
-layout.Padding = UDim.new(0, 9)
-layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-layout.Parent = scroll
+Corner(Minimize,10)
+local MinStroke = Stroke(Minimize,1.5)
 
---// Opções
-local options = {
-    {"Small Serve", "Key"},
-    {"Anti Hit Wzeu", "No Key"},
-    {"Pulse Hub", "No Key"},
-    {"Ajjans Hub", "Key System"},
-    {"Miranda Hub", "No Key"},
-    {"Fyy Community", "Key System"},
-    {"Chilli Hub", "No Key"},
-    {"Night Hub", "No Key"}
+local Close = Instance.new("TextButton")
+Close.Size = UDim2.fromOffset(38,38)
+Close.Position = UDim2.new(1,-43,0,10)
+Close.BackgroundColor3 = BLACK
+Close.Text = "X"
+Close.AutoButtonColor = false
+TextStyle(Close,16)
+Close.Parent = Header
+
+Corner(Close,10)
+local CloseStroke = Stroke(Close,1.5)
+
+--====================================================--
+-- SCROLL
+--====================================================--
+
+local Scroll = Instance.new("ScrollingFrame")
+Scroll.Size = UDim2.new(1,-20,1,-70)
+Scroll.Position = UDim2.fromOffset(10,62)
+Scroll.BackgroundTransparency = 1
+Scroll.BorderSizePixel = 0
+Scroll.ScrollBarThickness = 4
+Scroll.ScrollBarImageColor3 = WHITE
+Scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+Scroll.CanvasSize = UDim2.new()
+Scroll.Parent = Main
+
+local Layout = Instance.new("UIListLayout")
+Layout.Padding = UDim.new(0,9)
+Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+Layout.Parent = Scroll
+
+--====================================================--
+-- AÇÕES
+--====================================================--
+
+local Actions = {
+
+    ["Small Serve"] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/dertonware/scriptasda/refs/heads/main/scriptlua",true))()
+    
+    end,
+
+    ["Anti Hit Wzeu"] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Wzeus-NTH/Wzeusno1/main/Wzeus/nthzz"))()
+    end,
+
+    ["Pulse Hub"] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/PulseZax/Loader/refs/heads/main/.lua"))()
+    end,
+
+    ["Ajjans Hub"] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/virtuososvisualedits-prog/Ww/refs/heads/main/final-obfuscated.lua"))()
+    end,
+
+    ["Miranda Hub"] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/afkk"))()
+    end,
+
+    ["Fyy Community"] = function()
+        loadstring(game:HttpGet("https://FyyCommunity.my.id"))()
+    end,
+
+    ["Chilli Hub"] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/tienkhanh1/Chilli-Hub-Script/refs/heads/main/StealAnEgg"))()
+    end,
+
+    ["Night Hub"] = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/StealEggOnly.luau"))()
+    end
 }
 
---// Criar opção
-local function createOption(name, description, callback)
-    local button = Instance.new("TextButton")
-    button.Size = UDim2.new(1, -8, 0, 72)
-    button.BackgroundColor3 = BLACK
-    button.Text = ""
-    button.AutoButtonColor = false
-    button.Parent = scroll
+--====================================================--
+-- OPÇÕES
+--====================================================--
 
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(0, 13)
-    corner.Parent = button
+local Options = {
+    {"Small Serve","Key"},
+    {"Anti Hit Wzeu","No Key"},
+    {"Pulse Hub","No Key"},
+    {"Ajjans Hub","Key System"},
+    {"Miranda Hub","No Key"},
+    {"Fyy Community","Key System"},
+    {"Chilli Hub","No Key"},
+    {"Night Hub","No Key"}
+}
 
-    local stroke = Instance.new("UIStroke")
-    stroke.Color = WHITE
-    stroke.Thickness = 1.5
-    stroke.Parent = button
+--====================================================--
+-- CRIAR BOTÃO
+--====================================================--
 
-    -- Nome
-    local nameLabel = Instance.new("TextLabel")
-    nameLabel.Size = UDim2.new(1, -20, 0, 30)
-    nameLabel.Position = UDim2.fromOffset(10, 6)
-    nameLabel.BackgroundTransparency = 1
-    nameLabel.Text = name
-    nameLabel.TextSize = 17
-    nameLabel.TextXAlignment = Enum.TextXAlignment.Left
-    outlineText(nameLabel)
-    nameLabel.Parent = button
+for index,data in ipairs(Options) do
 
-    -- Descrição
-    local desc = Instance.new("TextLabel")
-    desc.Size = UDim2.new(1, -20, 0, 22)
-    desc.Position = UDim2.fromOffset(10, 39)
-    desc.BackgroundTransparency = 1
-    desc.Text = description
-    desc.TextSize = 12
-    desc.TextXAlignment = Enum.TextXAlignment.Left
-    outlineText(desc)
-    desc.Parent = button
+    local Button = Instance.new("TextButton")
+    Button.Size = UDim2.new(1,-8,0,72)
+    Button.BackgroundColor3 = BLACK
+    Button.BorderSizePixel = 0
+    Button.Text = ""
+    Button.AutoButtonColor = false
+    Button.LayoutOrder = index
+    Button.Parent = Scroll
 
-    button.MouseButton1Click:Connect(function()
-        if callback then
-            callback()
+    Corner(Button,13)
+
+    local ButtonStroke = Stroke(Button,1.5)
+
+    local Name = Instance.new("TextLabel")
+    Name.Size = UDim2.new(1,-20,0,30)
+    Name.Position = UDim2.fromOffset(10,5)
+    Name.BackgroundTransparency = 1
+    Name.Text = data[1]
+    Name.TextXAlignment = Enum.TextXAlignment.Left
+    TextStyle(Name,17)
+    Name.Parent = Button
+
+    local Description = Instance.new("TextLabel")
+    Description.Size = UDim2.new(1,-20,0,22)
+    Description.Position = UDim2.fromOffset(10,39)
+    Description.BackgroundTransparency = 1
+    Description.Text = data[2]
+    Description.TextXAlignment = Enum.TextXAlignment.Left
+    TextStyle(Description,12)
+    Description.Parent = Button
+
+    Button.Activated:Connect(function()
+
+        -- animação
+        TweenService:Create(
+            Button,
+            TweenInfo.new(.08),
+            {Size = UDim2.new(1,-16,0,66)}
+        ):Play()
+
+        TweenService:Create(
+            ButtonStroke,
+            TweenInfo.new(.08),
+            {Thickness = 4}
+        ):Play()
+
+        task.delay(.09,function()
+
+            TweenService:Create(
+                Button,
+                TweenInfo.new(.12),
+                {Size = UDim2.new(1,-8,0,72)}
+            ):Play()
+
+            TweenService:Create(
+                ButtonStroke,
+                TweenInfo.new(.12),
+                {Thickness = 1.5}
+            ):Play()
+
+        end)
+
+        -- executa a ação correspondente
+        local Action = Actions[data[1]]
+
+        if Action then
+            task.spawn(function()
+                local Success,Error = pcall(Action)
+
+                if not Success then
+                    warn("[Patrick Hubs] "..tostring(Error))
+                end
+            end)
         end
     end)
-
-    return button
 end
 
---// Botões
-for _, option in ipairs(options) do
-    createOption(option[1], option[2], function()
-        print("[Patrick Hubs] Selecionado:", option[1])
+--====================================================--
+-- ARRASTAR JANELA
+--====================================================--
 
-        -- Coloque aqui a ação correspondente de cada opção.
-    end)
-end
+local Dragging = false
+local DragStart
+local StartPosition
 
---// Arrastar janela
-local dragging = false
-local dragStart
-local startPos
+Header.InputBegan:Connect(function(input)
 
-top.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1
-        or input.UserInputType == Enum.UserInputType.Touch then
+    or input.UserInputType == Enum.UserInputType.Touch then
 
-        dragging = true
-        dragStart = input.Position
-        startPos = main.Position
+        Dragging = true
+        DragStart = input.Position
+        StartPosition = Main.Position
+    end
+end)
 
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
+Header.InputEnded:Connect(function(input)
+
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+    or input.UserInputType == Enum.UserInputType.Touch then
+
+        Dragging = false
     end
 end)
 
 UIS.InputChanged:Connect(function(input)
-    if dragging and (
-        input.UserInputType == Enum.UserInputType.MouseMovement
-        or input.UserInputType == Enum.UserInputType.Touch
-    ) then
 
-        local delta = input.Position - dragStart
+    if not Dragging then return end
 
-        main.Position = UDim2.new(
-            startPos.X.Scale,
-            startPos.X.Offset + delta.X,
-            startPos.Y.Scale,
-            startPos.Y.Offset + delta.Y
+    if input.UserInputType == Enum.UserInputType.MouseMovement
+    or input.UserInputType == Enum.UserInputType.Touch then
+
+        local Delta = input.Position - DragStart
+
+        Main.Position = UDim2.new(
+            StartPosition.X.Scale,
+            StartPosition.X.Offset + Delta.X,
+            StartPosition.Y.Scale,
+            StartPosition.Y.Offset + Delta.Y
         )
     end
 end)
 
---// Bolha PH
-local bubble = Instance.new("TextButton")
-bubble.Size = UDim2.fromOffset(58, 58)
-bubble.Position = UDim2.new(0.5, -29, 0.5, -29)
-bubble.BackgroundColor3 = BLACK
-bubble.Text = "PH"
-bubble.TextSize = 19
-bubble.Visible = false
-outlineText(bubble)
-bubble.Parent = gui
+--====================================================--
+-- BOLHA PH
+--====================================================--
 
-local bubbleCorner = Instance.new("UICorner")
-bubbleCorner.CornerRadius = UDim.new(1, 0)
-bubbleCorner.Parent = bubble
+local Bubble = Instance.new("TextButton")
+Bubble.Size = UDim2.fromOffset(58,58)
+Bubble.Position = UDim2.new(.5,-29,.5,-29)
+Bubble.BackgroundColor3 = BLACK
+Bubble.BorderSizePixel = 0
+Bubble.Text = "PH"
+Bubble.AutoButtonColor = false
+Bubble.Visible = false
+TextStyle(Bubble,19)
+Bubble.Parent = GUI
 
-local bubbleStroke = Instance.new("UIStroke")
-bubbleStroke.Color = WHITE
-bubbleStroke.Thickness = 2
-bubbleStroke.Parent = bubble
+Corner(Bubble,999)
+Stroke(Bubble,2)
 
---// Minimizar
-minimize.MouseButton1Click:Connect(function()
-    main.Visible = false
-    bubble.Visible = true
+--====================================================--
+-- MINIMIZAR
+--====================================================--
+
+Minimize.Activated:Connect(function()
+
+    Main.Visible = false
+    Bubble.Visible = true
+
+    Bubble.Size = UDim2.fromOffset(0,0)
+
+    TweenService:Create(
+        Bubble,
+        TweenInfo.new(.2,Enum.EasingStyle.Back),
+        {Size = UDim2.fromOffset(58,58)}
+    ):Play()
 end)
 
---// Reabrir
-bubble.MouseButton1Click:Connect(function()
-    bubble.Visible = false
-    main.Visible = true
+--====================================================--
+-- ABRIR
+--====================================================--
+
+Bubble.Activated:Connect(function()
+
+    TweenService:Create(
+        Bubble,
+        TweenInfo.new(.12),
+        {Size = UDim2.fromOffset(0,0)}
+    ):Play()
+
+    task.wait(.12)
+
+    Bubble.Visible = false
+    Main.Visible = true
+
+    Main.Size = UDim2.fromOffset(0,0)
+
+    TweenService:Create(
+        Main,
+        TweenInfo.new(.22,Enum.EasingStyle.Back),
+        {Size = UDim2.fromOffset(330,430)}
+    ):Play()
 end)
 
---// Fechar
-close.MouseButton1Click:Connect(function()
-    gui:Destroy()
+--====================================================--
+-- FECHAR
+--====================================================--
+
+Close.Activated:Connect(function()
+
+    TweenService:Create(
+        Main,
+        TweenInfo.new(.15),
+        {Size = UDim2.fromOffset(0,0)}
+    ):Play()
+
+    task.wait(.16)
+
+    GUI:Destroy()
 end)
 
---// Arrastar bolha
-local bubbleDragging = false
-local bubbleStart
-local bubblePos
-
-bubble.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1
-        or input.UserInputType == Enum.UserInputType.Touch then
-
-        bubbleDragging = true
-        bubbleStart = input.Position
-        bubblePos = bubble.Position
-
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                bubbleDragging = false
-            end
-        end)
-    end
-end)
-
-UIS.InputChanged:Connect(function(input)
-    if bubbleDragging and (
-        input.UserInputType == Enum.UserInputType.MouseMovement
-        or input.UserInputType == Enum.UserInputType.Touch
-    ) then
-
-        local delta = input.Position - bubbleStart
-
-        bubble.Position = UDim2.new(
-            bubblePos.X.Scale,
-            bubblePos.X.Offset + delta.X,
-            bubblePos.Y.Scale,
-            bubblePos.Y.Offset + delta.Y
-        )
-    end
-end)
+print("Patrick Hubs carregado!")
