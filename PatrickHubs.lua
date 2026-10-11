@@ -44,7 +44,20 @@ local function TextStyle(obj, size)
     obj.Font = Enum.Font.GothamBold
     obj.TextSize = size
 end
+local function Tween(obj, duration, properties, style)
+    local animation = TweenService:Create(
+        obj,
+        TweenInfo.new(
+            duration,
+            style or Enum.EasingStyle.Quad,
+            Enum.EasingDirection.Out
+        ),
+        properties
+    )
 
+    animation:Play()
+    return animation
+end
 --====================================================--
 -- JANELA
 --====================================================--
